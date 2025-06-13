@@ -1,0 +1,22 @@
+<div class="main-div">
+    <div class="product-card">
+        <img [src]="product.images[0]" alt="{{ product.title }}" class="product-image" />
+
+        <h3 class="product-title">{{ product.title }}</h3>
+        <p class="product-brand">{{ product.brand }}</p>
+
+        <p class="product-price">${{ product.price }}</p>
+
+        <p class="product-description">
+            {{ product.description }}
+
+        </p>
+
+        <p class="product-stock">
+            Items Left: {{ product.stock }}
+        </p>
+
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+
+</div>

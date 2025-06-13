@@ -1,0 +1,14 @@
+<input [(ngModel)]="searchedText" type="text">
+<select [(ngModel)]="searchedFilter">
+    <option value="all">ALL</option>
+    <option value="instock">In Stock</option>
+    <option value="outofstock">Out of Stock</option>
+</select>
+<button >Cart</button>
+<hr>
+<app-productcard *ngFor = 'let product of products'
+[product]="product"
+>
+    
+
+</app-productcard>
