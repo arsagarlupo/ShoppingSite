@@ -5,10 +5,11 @@ import { Product } from '../product/productlist';
   selector: 'app-productcard',
   imports: [],
   templateUrl: './productcard.component.html',
-  styleUrl: './productcard.component.css'
+  styleUrls: ['./productcard.component.css']
 })
 export class ProductcardComponent {
 @Input() product !: Product
 emitAddToCart(product: Product) {
   // Emit the add to cart event
-}}
+}
+}
