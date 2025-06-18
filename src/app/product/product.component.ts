@@ -1,92 +1,79 @@
-import { Component } from '@angular/core';
-import { Product } from './productlist';
 import { CommonModule } from '@angular/common';
+import { Component,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ProductcardComponent } from '../productcard/productcard.component';
-import { error } from 'console';
-import { ProductService } from '../product.service';
-import { Tasks } from './productlist';
-
-// import { ProductService } from './product.service.ts';
-// import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { TaskService } from '../task.service';
+import { Task } from '../task.model';
 
 @Component({
-  selector: 'app-product',
-  imports: [CommonModule, FormsModule,RouterModule,ProductcardComponent],
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule, RouterOutlet],
   templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  styleUrls: []
 })
-  // Make sure this path is correct
 
-export class ProductComponent {
-  taskName:string='';
-  assignee:string='';
-  status:string='';
+export class AppComponent implements OnInit {
+  title = 'shopSite';
 
-  searchedText: string = '';
-  searchedFilter: string = '';
-  products: Product[] = [];
-  newPost: any;
-  postErrorMessage: string="";
 
-  constructor(private productService: ProductService) {}
-  createPost() {
-    this.taskName = '';
-    this.assignee = '';
+  tasks: Task[] = [];
+  errorMessage: string = '';
+  taskForm: Task = {
+    title: '',
+    price: 0,
+    status: '',
+    description:'',
+    brand:'',
+    stock:0,
+  
 
-    // Simple validation
-    if (!this.newPost.title.trim() || !this.newPost.body.trim()) {
-      this.postErrorMessage = 'Please fill in both title and body.';
-      return;
-    }
+  };
+
+  constructor(private taskService: TaskService) {}
+
+  loadTasks() {
+    this.taskService.getTasks().subscribe(data => this.tasks = data);
+  }
+  ngOnInit() {
+    this.loadTasks(); 
   }
 
-  ngOnInit() {
-    this.productService.getProducts().subscribe({
-      next: (data: Product[]) => {
-        this.products = data;
-        console.log(this.products);
-      },
-      error: (err: any) => {
-        console.error('Error fetching products:', err);
-      }
+  addOrUpdateTask() {
+  if (this.taskForm.id) {
+    this.taskService.editTasks(this.taskForm.id, this.taskForm).subscribe((updatedTask) => {
+      this.loadTasks(); 
+      this.reset();
+    });
+  } else {
+    this.taskService.addTasks(this.taskForm).subscribe((newTask) => {
+      this.loadTasks(); 
+      this.reset();
     });
   }
-
-  // this.productService.getProducts().subscribe({
-  //   next: (data: Product[]) => {
-  //     this.products = data;
-  //     console.log(this.products);
-  //   }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-  function ngOnInit() {
-    throw new Error('Function not implemented.');
+  editTask(task: Task) {
+    this.taskForm = { ...task };
   }
-//  filteredProducts() {
-//     return this.products.filter(p => {
-//       const matchSearch =
-//         p.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-//         p.brand.toLowerCase().includes(this.searchText.toLowerCase());
 
-//       const matchStock =
-//         this.selectedFilter === 'all' ||
-//         (this.selectedFilter === 'in-stock' && p.stock > 0) ||
-//         (this.selectedFilter === 'Low Stock' && p.stock === 0);
+  deleteTask(id?: number) {
+  if (!id) return;
+  this.taskService.deleteTasks(id).subscribe(() => {
+    this.tasks = this.tasks.filter((t) => t.id !== id);
+  });
+}
 
-//       return matchSearch && matchStock;
-//     });
-//   }
+
+  reset() {
+    this.taskForm = {
+    title: '',
+    price: 0,
+    status: '',
+    description:'',
+    brand:'',
+    stock:0,
+    };
+  }
+}

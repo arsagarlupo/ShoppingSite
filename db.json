@@ -1,28 +1,31 @@
 {
   "tasks": [
     {
-      "id": "87e0",
-      "taskName": "Bath at 7 AM",
-      "assignee": "Abhiram",
-      "status": "Done"
+      "id": "ea83",
+      "title": "DDDDD",
+      "price": 25,
+      "status": "Instock",
+      "description": "asdfghjkl",
+      "brand": "asdfghjkl",
+      "stock": 25
     },
     {
-      "id": "d205",
-      "taskName": "Tiffin at 8 30",
-      "assignee": "nova dining area",
-      "status": "In Progress"
+      "id": "6937",
+      "title": "asdfvb",
+      "price": 444,
+      "status": "Instock",
+      "description": "xxx",
+      "brand": "33x",
+      "stock": 333
     },
     {
-      "id": "ded9",
-      "taskName": "",
-      "assignee": "",
-      "status": ""
-    },
-    {
-      "id": "3ad2",
-      "taskName": "xcfgh",
-      "assignee": "c",
-      "status": ""
+      "id": "108d",
+      "title": "erf",
+      "price": 44,
+      "status": "",
+      "description": "asxc",
+      "brand": "asxc",
+      "stock": 4
     }
   ]
 }

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { RouteComponent } from './route/route.component';
-import { RiasComponent } from './rias/rias.component';
-import { ProductComponent } from './product/product.component';
+import { AppComponent } from './product/product.component';
+import { LoginpageComponent } from './loginpage/loginpage.component';
 
 export const routes: Routes = [
-    {path:"",component:RiasComponent},
+    {path:"",component:LoginpageComponent},
     {path:'route',component:RouteComponent},
-    {path:"products",component:ProductComponent},
+    {path:"products",component:AppComponent},
 ];

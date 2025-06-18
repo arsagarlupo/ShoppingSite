@@ -13,61 +13,67 @@ import { Task } from './task.model';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'shopSite';
 
 
   tasks: Task[] = [];
   errorMessage: string = '';
   taskForm: Task = {
-    taskName: '',
-    assignee: '',
-    status: ''
+    title: '',
+    price: 0,
+    status: '',
+    description:'',
+    brand:'',
+    stock:0,
   
 
   };
 
-  constructor(private taskService: TaskService) {}
+//   constructor(private taskService: TaskService) {}
 
-  loadTasks() {
-    this.taskService.getTasks().subscribe(data => this.tasks = data);
-  }
-  ngOnInit() {
-    this.loadTasks(); 
-  }
+//   loadTasks() {
+//     this.taskService.getTasks().subscribe(data => this.tasks = data);
+//   }
+//   ngOnInit() {
+//     this.loadTasks(); 
+//   }
 
-  addOrUpdateTask() {
-  if (this.taskForm.id) {
-    this.taskService.editTasks(this.taskForm.id, this.taskForm).subscribe((updatedTask) => {
-      this.loadTasks(); 
-      this.reset();
-    });
-  } else {
-    this.taskService.addTasks(this.taskForm).subscribe((newTask) => {
-      this.loadTasks(); 
-      this.reset();
-    });
-  }
-}
-
-
-  editTask(task: Task) {
-    this.taskForm = { ...task };
-  }
-
-  deleteTask(id?: number) {
-  if (!id) return;
-  this.taskService.deleteTasks(id).subscribe(() => {
-    this.tasks = this.tasks.filter((t) => t.id !== id);
-  });
-}
+//   addOrUpdateTask() {
+//   if (this.taskForm.id) {
+//     this.taskService.editTasks(this.taskForm.id, this.taskForm).subscribe((updatedTask) => {
+//       this.loadTasks(); 
+//       this.reset();
+//     });
+//   } else {
+//     this.taskService.addTasks(this.taskForm).subscribe((newTask) => {
+//       this.loadTasks(); 
+//       this.reset();
+//     });
+//   }
+// }
 
 
-  reset() {
-    this.taskForm = {
-      taskName: '',
-      assignee: '',
-      status: ''
-    };
-  }
+//   editTask(task: Task) {
+//     this.taskForm = { ...task };
+//   }
+
+//   deleteTask(id?: number) {
+//   if (!id) return;
+//   this.taskService.deleteTasks(id).subscribe(() => {
+//     this.tasks = this.tasks.filter((t) => t.id !== id);
+//   });
+// }
+
+
+//   reset() {
+//     this.taskForm = {
+//     title: '',
+//     price: 0,
+//     status: '',
+//     description:'',
+//     brand:'',
+//     stock:0,
+//     };
+//   }
 }
