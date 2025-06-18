@@ -1,15 +1,6 @@
 {
   "tasks": [
     {
-      "id": "ea83",
-      "title": "DDDDD",
-      "price": 25,
-      "status": "Instock",
-      "description": "asdfghjkl",
-      "brand": "asdfghjkl",
-      "stock": 25
-    },
-    {
       "id": "6937",
       "title": "asdfvb",
       "price": 444,
