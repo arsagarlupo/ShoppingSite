@@ -1,1 +1,47 @@
-<app-product></app-product>
+<!-- Task Input Section -->
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<div class="task-form">
+  <input type="text" placeholder="Task Name" [(ngModel)]="taskForm.taskName" />
+  <input type="text" placeholder="Assignee" [(ngModel)]="taskForm.assignee" />
+  <select [(ngModel)]="taskForm.status">
+    <option value="" disabled selected>Status</option>
+    <option value="Not Started">Not Started</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Done">Done</option>
+  </select>
+  <button (click)="addOrUpdateTask()">Save Task</button>
+
+</div>
+
+<!-- Task List Table -->
+<table>
+  <thead>
+    <tr>
+      <th>Task Name</th>
+      <th>Assignee</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.taskName }}</td>
+      <td>{{ task.assignee }}</td>
+      <td>{{ task.status }}</td>
+      <td>
+        <button (click)="editTask(task)">Edit</button>
+        <button (click)="deleteTask(task.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <nav>
+    <a routerLink="">
+        Home
+    </a>
+    <a routerLink="route">About</a>
+    <button [routerLink]="['products']">Go to products !</button>
+</nav>
+
+<router-outlet></router-outlet> -->

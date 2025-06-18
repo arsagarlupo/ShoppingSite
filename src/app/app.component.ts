@@ -1,17 +1,73 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule} from '@angular/router';
-import { ProductComponent } from './product/product.component';
-// import { ProductcardComponent } from './productcard/productcard.component';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { TaskService } from './task.service';
+import { Task } from './task.model';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule,FormsModule,RouterModule,ProductComponent],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
   title = 'shopSite';
 
+
+  tasks: Task[] = [];
+  errorMessage: string = '';
+  taskForm: Task = {
+    taskName: '',
+    assignee: '',
+    status: ''
+  
+
+  };
+
+  constructor(private taskService: TaskService) {}
+
+  loadTasks() {
+    this.taskService.getTasks().subscribe(data => this.tasks = data);
+  }
+  ngOnInit() {
+    this.loadTasks(); 
+  }
+
+  addOrUpdateTask() {
+  if (this.taskForm.id) {
+    this.taskService.editTasks(this.taskForm.id, this.taskForm).subscribe((updatedTask) => {
+      this.loadTasks(); 
+      this.reset();
+    });
+  } else {
+    this.taskService.addTasks(this.taskForm).subscribe((newTask) => {
+      this.loadTasks(); 
+      this.reset();
+    });
+  }
+}
+
+
+  editTask(task: Task) {
+    this.taskForm = { ...task };
+  }
+
+  deleteTask(id?: number) {
+  if (!id) return;
+  this.taskService.deleteTasks(id).subscribe(() => {
+    this.tasks = this.tasks.filter((t) => t.id !== id);
+  });
+}
+
+
+  reset() {
+    this.taskForm = {
+      taskName: '',
+      assignee: '',
+      status: ''
+    };
+  }
 }

@@ -1,14 +1,53 @@
-<input [(ngModel)]="searchedText" type="text">
+
+
+<h1>Products</h1>
+
+
+
+
+<!-- <input [(ngModel)]="searchedText" type="text">
 <select [(ngModel)]="searchedFilter">
     <option value="all">ALL</option>
     <option value="instock">In Stock</option>
     <option value="outofstock">Out of Stock</option>
 </select>
 <button >Cart</button>
-<hr>
-<app-productcard *ngFor = 'let product of products'
-[product]="product"
->
-    
+<hr> -->
+<!-- <input [(ngModel)]="taskName" type="text" placeholder="task name...">
+<input [(ngModel)]="assignee" type="text" placeholder="assignment name">
+<select [(ngModel)]="status">
+  <option value="status">Status</option>
+  <option value="inprogress">In Progress</option>
+  <option value="done">Done</option>
+</select> -->
+<!-- <button (click)="addOrUpdateTask()">Update</button>
 
-</app-productcard>
+<table border="1" style="width:60%; margin: 20px 0; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="background-color: rgb(232, 68, 68);">Task Name</th>
+      <th style="background-color: rgb(232, 68, 68);">Assignee</th>
+      <th style="background-color: rgb(232, 68, 68);">Status</th>
+      <th style="background-color: rgb(232, 68, 68);">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let task of tasks$ | async">
+      <td>{{task.taskName}}</td>
+      <td> {{task.assignee}} </td>
+      <td> {{task.status}} </td>
+      <td>
+        <button (click)="editTask">Edit</button>
+        <button (click)="deleteTask(task.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr ></tr>
+  </tbody>
+
+</table>
+<app-productcard *ngFor='let product of products' [product]="product">
+
+
+</app-productcard> -->

@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { ProductcardComponent } from '../productcard/productcard.component';
 import { error } from 'console';
 import { ProductService } from '../product.service';
+import { Tasks } from './productlist';
+
 // import { ProductService } from './product.service.ts';
 // import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,12 +20,27 @@ import { ProductService } from '../product.service';
   // Make sure this path is correct
 
 export class ProductComponent {
+  taskName:string='';
+  assignee:string='';
+  status:string='';
 
   searchedText: string = '';
   searchedFilter: string = '';
   products: Product[] = [];
+  newPost: any;
+  postErrorMessage: string="";
 
   constructor(private productService: ProductService) {}
+  createPost() {
+    this.taskName = '';
+    this.assignee = '';
+
+    // Simple validation
+    if (!this.newPost.title.trim() || !this.newPost.body.trim()) {
+      this.postErrorMessage = 'Please fill in both title and body.';
+      return;
+    }
+  }
 
   ngOnInit() {
     this.productService.getProducts().subscribe({
@@ -55,6 +72,10 @@ export class ProductComponent {
 
 
 
+
+  function ngOnInit() {
+    throw new Error('Function not implemented.');
+  }
 //  filteredProducts() {
 //     return this.products.filter(p => {
 //       const matchSearch =

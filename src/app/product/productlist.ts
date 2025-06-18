@@ -9,3 +9,10 @@ export interface Product {
   stock: number;
   images: string[];
 }
+
+export interface Tasks{
+  id?: number;
+  taskname:string;
+  assignee:string;
+  status:string;
+}
